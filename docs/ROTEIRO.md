@@ -2,7 +2,7 @@
 
 **Versão inicial:** 29/09/2026
 
-**Equipe:** [preencher nomes, até 4 integrantes]
+**Equipe:** Herick Pinheiro e Renata Ribeiro
 
 **Repositório:** https://github.com/ribeirore/grade-horaria-automatizada
 
@@ -82,10 +82,3 @@ Usamos Codex (OpenAI) como apoio para análise dos dados, planejamento, implemen
 
 As instruções da competição mencionam Claude na estratégia de IA e pedem que o relatório informe outras ferramentas usadas. **Pendente de decisão da equipe:** se e como usar Claude como segunda revisão durante a construção, ou confirmar com a organização se seu uso é obrigatório. O relatório final registrará apenas as ferramentas efetivamente utilizadas.
 
-## 8. Pontos a confirmar com a equipe
-
-- [ ] Nomes dos integrantes e divisão de responsabilidades.
-- [ ] Confirmação de que a formação da equipe foi registrada com a organização; o PDF não descreve formulário ou canal de inscrição.
-- [ ] Prioridade padrão entre os critérios de preferência e quantidade de alternativas a mostrar.
-- [ ] Estratégia de uso de Claude, conforme a instrução da competição.
-- [ ] Link e responsável pelo vídeo final.
