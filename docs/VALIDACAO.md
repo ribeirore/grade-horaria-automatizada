@@ -6,6 +6,8 @@ Executada pelo agente; aceitação humana pendente. Windows, Node.js 22.23.2, na
 
 `npm run build`: TypeScript e Vite concluídos. `npm run lint`: sem erros. `npm test`: 13 testes passaram, nenhum falhou.
 
+A [CI no GitHub](https://github.com/ribeirore/grade-horaria-automatizada/actions/runs/36920267486) passou no commit `49d9416` da `feature`, executando `npm ci`, lint, testes e build em Ubuntu/Node 22. Nenhum job de publicação foi executado. Os CSVs mantêm os bytes originais entre sistemas via `.gitattributes`; hashes conferidos localmente.
+
 Suíte: CSV com aspas/vírgulas/quebras citadas, adjacência, encontros indivisíveis, bloqueios, turma fixada, créditos/métricas, início cedo/tarde/fim cedo, impossibilidade por pares/global, busca limitada, conflito interno, busca textual e integridade dos dados. Enumerador por produto cartesiano sem poda confere contagem/custo mínimo em 40 casos pequenos.
 
 Base real: dois períodos, todas as 4.943 turmas e 7.942 encontros incluídos, sem duplicatas ou conflito interno. Exemplo 2026.1 confere 203 combinações e todas as alternativas retornadas sem choque.
@@ -25,6 +27,7 @@ Base real: dois períodos, todas as 4.943 turmas e 7.942 encontros incluídos, s
 | Repetir bloqueio | Aviso, total inalterado |
 | Limpar bloqueios | Geração possível novamente |
 | Tela 390×844 | Após correção, página e largura útil iguais (375px); rolagem interna na grade/alternativas |
+| Build compilado em preview local (porta 4173) | Oferta carregada, Web Worker funcionando, 203 combinações / oito alternativas; console sem erros capturados |
 
 Após feedback da equipe, linhas passaram de 54px para 42px, mantendo posição/duração proporcionais. Blocos curtos priorizam código/turma/horário; detalhes completos ficam no modal.
 

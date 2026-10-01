@@ -29,6 +29,8 @@ Registre somente interações de IA que alteraram arquitetura, interpretação d
 - **Validação:** build/lint/test locais; 13 testes aprovados, enumeração independente de 40 conjuntos, integridade de toda a base utilizável e exemplo real com 203 combinações. Testes de navegador confirmaram mudança de ranking, turma fixada, persistência, outro período, bloqueios e cenários impossíveis. Detalhes e pendências em [VALIDACAO.md](VALIDACAO.md).
 - **Decisão:** restrições rígidas separadas de pesos; alternativas deduplicadas por horários; limite de busca anunciado. Quatro turmas com conflito interno excluídas, não corrigidas por suposição. Sem Micro-Horário externo, sem LLM em runtime, sem merge/main ou hospedagem.
 
+**Fechamento técnico:** branch enviada ao remoto; CI GitHub aprovada no commit `49d9416`. Preview local do build confirmou dados e worker com 203 combinações, sem erros de console capturados. `main` permaneceu no init `e81ede6`.
+
 ## 01/10/2026 — Erros de interface encontrados na validação
 
 - **Objetivo:** verificar se o que o usuário preenche é o que o motor recebe.
