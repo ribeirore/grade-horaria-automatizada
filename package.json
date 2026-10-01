@@ -5,7 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prepare:data": "node scripts/prepare-data.mjs",
+    "predev": "npm run prepare:data",
+    "prebuild": "npm run prepare:data",
     "build": "tsc -b && vite build",
+    "pretest": "npm run prepare:data",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
     "lint": "oxlint",
     "preview": "vite preview"
   },

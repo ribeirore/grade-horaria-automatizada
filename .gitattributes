@@ -1,0 +1,2 @@
+# Preserve os bytes dos dados oficiais e seus hashes em qualquer sistema.
+data/raw/* -text

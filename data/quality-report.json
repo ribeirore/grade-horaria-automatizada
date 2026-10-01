@@ -1,0 +1,36 @@
+{
+  "source": "LIA Impact Lab — Case 3 / SGU",
+  "sourceDate": "2026-08-17",
+  "sourceUrl": "https://github.com/igor-peres/impact-lab-sieng2026",
+  "rawRows": 74381,
+  "rawSections": 4947,
+  "logicalSlots": 7952,
+  "includedSlots": 7942,
+  "missingCatalogCodes": 927,
+  "excluded": [
+    {
+      "period": "20252",
+      "section": "TEO3235-1FW",
+      "reason": "Blocos da própria turma se sobrepõem"
+    },
+    {
+      "period": "20261",
+      "section": "ART1028-18D",
+      "reason": "Blocos da própria turma se sobrepõem"
+    },
+    {
+      "period": "20261",
+      "section": "ECO1352-2JA",
+      "reason": "Blocos da própria turma se sobrepõem"
+    },
+    {
+      "period": "20261",
+      "section": "ENG4922-3VA",
+      "reason": "Blocos da própria turma se sobrepõem"
+    }
+  ],
+  "sha256": {
+    "schedules": "3468276fecb56ede63eb1855eef8f66684124697af596801dd6e71f9c5938f63",
+    "catalog": "54b905aa31aa13d375aec1f3530a8c45a811160ca5c3be54b77618eba8161e4e"
+  }
+}

@@ -2,6 +2,8 @@
 
 **Versão inicial:** 29/09/2026
 
+**Atualização de execução:** 01/10/2026. O plano original abaixo foi preservado; resultados e mudanças estão ao final.
+
 **Equipe:** [preencher nomes, até 4 integrantes]
 
 **Repositório:** https://github.com/ribeirore/grade-horaria-automatizada
@@ -89,3 +91,18 @@ As instruções da competição mencionam Claude na estratégia de IA e pedem qu
 - [ ] Prioridade padrão entre os critérios de preferência e quantidade de alternativas a mostrar.
 - [ ] Estratégia de uso de Claude, conforme a instrução da competição.
 - [ ] Link e responsável pelo vídeo final.
+
+## 9. Execução e mudanças — 01/10/2026
+
+Após autorização da equipe, a branch `feature` foi criada a partir do init. Dados, motor, interface e testes foram implementados no mesmo ciclo; as datas de 30/09 e 01/10 acima eram metas, não execução registrada.
+
+- Normalização concluída: 4.943 turmas e 7.942 encontros utilizáveis; quatro turmas com sobreposição interna excluídas, originais preservados.
+- Busca em Web Worker, limites aproximados de 3,5s/um milhão de nós, resultado parcial explícito e até oito alternativas de horários distintos.
+- Preferências com pesos 0–5; padrão implementado: intervalos 5, dias 2, início/fim 0. É uma escolha inicial ajustável, ainda sujeita à aceitação humana.
+- Seleção por período, busca, turmas fixadas, bloqueios, perfis/pesos, calendário, detalhes e persistência local implementados.
+- Exportação JSON e estilo de impressão implementados; conferência manual de download/impressão pendente.
+- Treze testes automatizados passaram; oráculo independente em 40 casos, integridade dos dois períodos e validação de interação descritos em [VALIDACAO.md](VALIDACAO.md).
+- Feedback da equipe: blocos de aula estavam grandes; linhas reduzidas de 54px para 42px, preservando proporção temporal. Corrigida rolagem da grade no celular.
+- **Hospedagem adiada por pedido explícito da equipe.** CI somente valida/compila; nenhuma implantação ou merge na `main`. Caminho gratuito em [PUBLICACAO.md](PUBLICACAO.md).
+
+Os critérios do produto estão implementados e testados nos casos registrados. Entrega da competição continua pendente de validação humana, registro da equipe, decisão sobre Claude, vídeo e aplicação online quando autorizada. Não marcar a competição como concluída apenas porque o desenvolvimento terminou.
