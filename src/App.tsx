@@ -1,6 +1,9 @@
 import { useEffect, useReducer, useState } from 'react'
 import catalog from './data/catalog.json'
 import { emptyDraft, reducer } from './domain/draft'
+import { useGenerator } from './domain/useGenerator'
+import { Results } from './components/Results'
+import type { Action } from './domain/draft'
 import type { Bloqueio } from './domain/draft'
 import { loadDrafts, saveDrafts } from './domain/storage'
 import { Disciplinas } from './components/Disciplinas'
@@ -39,11 +42,19 @@ function initialize() {
 
 function App() {
   const [initial] = useState(initialize)
-  const [state, dispatch] = useReducer(reducer, initial.state)
+  const [state, formDispatch] = useReducer(reducer, initial.state)
   const [warning, setWarning] = useState(initial.warning)
   const [section, setSection] = useState<Section>('disciplinas')
   const [editing, setEditing] = useState<Bloqueio | null>(null)
   const [review, setReview] = useState(false)
+  const { generation, generate, reset } = useGenerator()
+  const [active, setActive] = useState(0)
+  function dispatch(action: Action) {
+    reset()
+    setActive(0)
+    formDispatch(action)
+  }
+  const result = generation.status === 'done' ? generation.result : null
   const oferta = ofertas.find((offer) => offer.periodo === state.periodo)!
   const draft = state.drafts[state.periodo]
   useEffect(() => {
@@ -222,17 +233,30 @@ function App() {
                 </button>
                 <button
                   className="generate-button"
-                  disabled
+                  disabled={!draft.selecionadas.length || generation.status === 'running'}
+                  onClick={() => { setActive(0); void generate(state.periodo, draft) }}
                   aria-describedby="generation-limit"
                 >
-                  Gerar grade
+                  {generation.status === 'running' ? 'Gerando…' : 'Gerar grade'}
                 </button>
                 <p id="generation-limit">
-                  Geração de grades ainda não disponível
+                  {draft.selecionadas.length ? 'Até 5 horários distintos, sem choque ou bloqueio.' : 'Selecione ao menos uma disciplina para gerar.'}
                 </p>
               </div>
             </aside>
+            <div className="schedule-area">
+            {generation.status === 'running' && <section className="results-panel glass" aria-busy="true">
+              <p role="status">Buscando grades sem conflitos…</p>
+              <button className="secondary" onClick={() => reset('cancelled')}>Cancelar busca</button>
+            </section>}
+            {generation.status === 'cancelled' && <p role="status" className="attention">Busca cancelada. Suas escolhas foram preservadas.</p>}
+            {generation.status === 'error' && <section className="results-panel glass" id="generation-results" tabIndex={-1}>
+              <p role="alert">{generation.error}</p>
+              <button className="secondary" onClick={() => { setActive(0); void generate(state.periodo, draft) }}>Tentar novamente</button>
+            </section>}
+            {result && <Results result={result} active={active} onSelect={setActive} priorities={draft.prioridades} />}
             <Calendar
+              grade={result?.grades[active]}
               bloqueios={draft.bloqueios}
               onAdd={() => openSection('disponibilidade')}
               onEdit={(block) => openSection('disponibilidade', block)}
@@ -241,14 +265,15 @@ function App() {
                 dispatch({ type: 'removerBloqueio', id })
               }}
             />
+            </div>
           </div>
         </main>
         <footer className="app-footer">
           <div>
-            <strong>Um planejamento, ainda em construção.</strong>
+            <strong>Sua grade começa com suas escolhas.</strong>
             <p>
-              A geração e a comparação de grades estão pendentes. Esta
-              ferramenta não efetiva matrícula, verifica pré-requisitos ou
+              Sugestões com oferta histórica oficial. Esta ferramenta não
+              efetiva matrícula, verifica pré-requisitos ou
               garante vagas.
             </p>
           </div>

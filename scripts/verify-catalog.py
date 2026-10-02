@@ -45,3 +45,49 @@ assert not any(field in payload for field in ['PROF_', 'SALA_', 'professor_id', 
 report['result'] = 'Every offered course, name, credit value, class count, period total, block total and source hash matches.'
 Path('docs/catalog-verification.json').write_text(json.dumps(report, indent=2) + '\n')
 print(json.dumps(report, indent=2))
+
+# Scheduling verification deliberately independent of TypeScript normalization.
+scheduling = json.loads(Path('src/data/scheduling.json').read_text())
+assert scheduling['source'] == catalog['source']
+classes = defaultdict(list)
+for row in schedule:
+    classes[(row['periodo'], row['turma_id'])].append(row)
+days = ['Segunda', 'Terca', 'Quarta', 'Quinta', 'Sexta', 'Sabado']
+def minute(value):
+    h, m = map(int, value.split(':'))
+    assert 0 <= h < 24 and 0 <= m < 60
+    return 60 * h + m
+expected_sections = {}
+excluded = []
+for (period, identity), rows in sorted(classes.items()):
+    codes = {r['cod_disciplina'] for r in rows}
+    assert len(codes) == 1
+    slots = sorted({(days.index(r['dia_semana']), minute(r['hora_inicio']), minute(r['hora_fim'])) for r in rows})
+    assert all(start < end for day, start, end in slots)
+    if any(a[0] == b[0] and max(a[1], b[1]) < min(a[2], b[2]) for i, a in enumerate(slots) for b in slots[i+1:]):
+        excluded.append({'periodo': period, 'turmaId': identity, 'reason': 'Blocos da própria turma se sobrepõem'})
+        continue
+    expected_sections[(period, identity)] = (next(iter(codes)), slots, rows[0]['turma'])
+assert scheduling['excluded'] == excluded
+assert len(excluded) == 4
+actual_sections = {}
+for period in scheduling['periods']:
+    offer = next(o for o in catalog['ofertas'] if o['periodo'] == period['periodo'])
+    courses = {c['codigo']: c for c in offer['disciplinas']}
+    assert {c['code'] for c in period['courses']} == set(courses)
+    for course in period['courses']:
+        assert course['name'] == courses[course['code']]['nome']
+        for section in course['sections']:
+            key = (section['periodo'], section['id'])
+            assert section['periodo'] == period['periodo']
+            assert key not in actual_sections
+            assert section['code'] == course['code']
+            assert section['credits'] == courses[course['code']]['creditos']
+            actual_sections[key] = (section['code'], [(s['day'], s['start'], s['end']) for s in section['slots']], section['label'])
+assert actual_sections == expected_sections
+assert len(actual_sections) == 4943
+assert sum(len(s[1]) for s in actual_sections.values()) == 7942
+assert not any(field in json.dumps(scheduling) for field in ['PROF_', 'SALA_', 'professor_id', 'sala_id'])
+report = {'revision': scheduling['source']['revision'], 'usableClasses': len(actual_sections), 'usableBlocks': 7942, 'excluded': excluded, 'result': 'All identities, complete meetings, labels, unknown credits and exclusions match independent CSV normalization.'}
+Path('docs/scheduling-verification.json').write_text(json.dumps(report, indent=2, ensure_ascii=False) + '\n')
+print(json.dumps(report, indent=2, ensure_ascii=False))
