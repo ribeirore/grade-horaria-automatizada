@@ -1,15 +1,42 @@
+@font-face {
+  font-family: 'Space Grotesk Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url('../node_modules/@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Source Sans 3 Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 900;
+  src: url('../node_modules/@fontsource-variable/source-sans-3/files/source-sans-3-latin-wght-normal.woff2') format('woff2');
+}
+
 :root {
-  background: #f4f8fa;
-  color: #334d5d;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: 'Source Sans 3 Variable', 'Segoe UI', sans-serif;
+  color: #263e33;
+  background: #deece4;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --green: #176b4a;
+  --muted: #53655c;
+  --line: #cbd9d1;
+  --heading: 'Space Grotesk Variable', 'Segoe UI', sans-serif;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; background: linear-gradient(180deg, #f7faf8, #deece4); }
+button, input, select { font: inherit; }
+button, a, input, select, summary { -webkit-tap-highlight-color: transparent; }
+button, summary { cursor: pointer; }
+button { transition: background-color 150ms, color 150ms; }
+button:disabled { cursor: default; }
+button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid #a65b10; outline-offset: 3px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { color: #1a3728; }
+ul, ol { padding: 0; margin: 0; }
+a { color: var(--green); text-underline-offset: 3px; }
+input, select { min-width: 0; }
+button { color: inherit; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
