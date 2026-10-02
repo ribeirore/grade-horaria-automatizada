@@ -1,0 +1,23 @@
+{
+  "revision": "d506455be974a49c8aa79ab74cd89731a60cfefc",
+  "checkedCourses": 2714,
+  "periods": [
+    {
+      "periodo": "20261",
+      "courses": 1350,
+      "classes": 2523,
+      "blocks": 4060,
+      "missingFullNames": 711,
+      "unknownCredits": 1
+    },
+    {
+      "periodo": "20252",
+      "courses": 1364,
+      "classes": 2424,
+      "blocks": 3892,
+      "missingFullNames": 669,
+      "unknownCredits": 1
+    }
+  ],
+  "result": "Every offered course, name, credit value, class count, period total, block total and source hash matches."
+}
