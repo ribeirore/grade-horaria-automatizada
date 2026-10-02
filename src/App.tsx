@@ -232,6 +232,7 @@ function App() {
                   Revisar escolhas <span aria-hidden="true">→</span>
                 </button>
                 <button
+                  id="generate-button"
                   className="generate-button"
                   disabled={!draft.selecionadas.length || generation.status === 'running'}
                   onClick={() => { setActive(0); void generate(state.periodo, draft) }}
@@ -247,7 +248,7 @@ function App() {
             <div className="schedule-area">
             {generation.status === 'running' && <section className="results-panel glass" aria-busy="true">
               <p role="status">Buscando grades sem conflitos…</p>
-              <button className="secondary" onClick={() => reset('cancelled')}>Cancelar busca</button>
+              <button className="secondary" onClick={() => { reset('cancelled'); requestAnimationFrame(() => document.getElementById('generate-button')?.focus()) }}>Cancelar busca</button>
             </section>}
             {generation.status === 'cancelled' && <p role="status" className="attention">Busca cancelada. Suas escolhas foram preservadas.</p>}
             {generation.status === 'error' && <section className="results-panel glass" id="generation-results" tabIndex={-1}>
