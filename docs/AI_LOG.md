@@ -50,3 +50,21 @@ Registre somente interações de IA que alteraram arquitetura, interpretação d
 - **Resultado:** inventário inicial em arquivo temporário; identidade MatriculIA com lâmpada SVG própria. Nenhum dado da oferta foi modificado.
 - **Validação:** 30 testes de domínio, lint e build aprovados; catálogo conferido por Python em 2.714 pares. Fluxos Chromium executados antes do commit.
 - **Decisão:** versionar apenas arquivos explicitamente selecionados; preservar branch remota feature; vídeo pendente de gravação pela equipe.
+
+## 01/10/2026 — Histórico remoto do Herick incorporado
+
+- **Objetivo:** aproveitar trabalho existente e registrar o processo completo.
+- **Contexto:** motor e validações na branch remota feature, ponta cc96474, motor d2e4c6a, autoria Herick Pinheiro.
+- **Instrução à IA:** importar seletivamente motor, Worker e testes, sem substituir o front aprovado.
+- **Resultado:** histórico remoto integral preservado em [AI_LOG-herick.md](history/AI_LOG-herick.md), incluindo erro real de horários exibidos versus enviados; evidências anteriores em [VALIDACAO-herick.md](history/VALIDACAO-herick.md).
+- **Validação:** leitura dos arquivos e autoria/commits no Git; números anteriores não substituem nova validação integrada.
+- **Decisão:** remover do contrato integrado pesos, exportação e turma fixa; preservar branch remota.
+
+## 02/10/2026 — Gerador integrado e ranking explícito
+
+- **Objetivo:** gerar até cinco grades no front aprovado com contratos do PRD consolidado.
+- **Contexto:** motor remoto com busca/poda e front com prioridades ordenadas; créditos desconhecidos no catálogo.
+- **Instrução à IA:** preservar turmas completas, normalizar fonte fixada, comparar prioridades lexicograficamente, permitir cancelamento e invalidar resultados após mudanças.
+- **Resultado:** motor adaptado, dados adicionais sob demanda, Worker terminável, alternativas, comparação de métricas, calendário com aulas e detalhes de todos os encontros; diagnósticos distinguem oferta inutilizável, bloqueios, impossibilidade e busca limitada.
+- **Validação:** 48 testes de domínio; oráculo cartesiano em 40 casos e cinco ordens; exemplo oficial com 203 combinações. Python confirmou 4.943 turmas/7.942 blocos e quatro exclusões. 14 cenários Chromium, axe e capturas em quatro larguras passaram; ver [INTEGRACAO_MOTOR.md](INTEGRACAO_MOTOR.md).
+- **Decisão:** limites de um milhão de nós/3.500 ms; busca interrompida não afirma ótimo global nem impossibilidade. Dados históricos permanecem sem atualização. Skills create-specification e vercel-react-best-practices aplicadas; ferramenta de IA usada: somente Codex.

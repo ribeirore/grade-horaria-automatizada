@@ -167,3 +167,30 @@ input[type='checkbox'] { accent-color: var(--green); width: 17px; height: 17px; 
   .block-list li { align-items: start; gap: 3px; } .block-list li > span { display: block; font-size: 13px; } .block-list li > span > span { display: block; } .block-list li > div { gap: 3px; }
   .app-footer { flex-direction: column; gap: 14px; font-size: 12px; margin-top: 22px; } .review-content { padding: 20px; } .review-heading h2 { font-size: 24px; } .review-section-heading { align-items: start; flex-direction: column; gap: 3px; } .review-section-heading .text-button { padding-left: 0; }
 }
+
+/* Integrated generation uses the existing mineral palette and type hierarchy. */
+.schedule-area { min-width: 0; display: grid; gap: 20px; }
+.generate-button:not(:disabled) { background: var(--green); color: #fff; border-color: var(--green); }
+.generate-button:not(:disabled):hover { background: #105437; }
+.results-panel { min-width: 0; padding: 24px 28px; }
+.results-panel h2 { font-family: var(--heading); font-size: 24px; font-weight: 500; }
+.results-panel p { margin: 12px 0; line-height: 1.5; }
+.result-issues { list-style: disc; padding-left: 20px; line-height: 1.6; }
+.alternative-nav { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.alternative-nav [aria-pressed='true'] { background: #d9ebdf; border-color: var(--green); }
+.metrics-comparison { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.metrics-comparison dl { margin: 0; padding: 14px 10px; }
+.metrics-comparison dt { font-weight: 650; margin-bottom: 10px; }
+.metrics-comparison dd { margin: 4px 0; font-size: 14px; }
+.metrics-comparison .active-metrics { background: #dfede4; }
+.meetings-list { list-style: none; margin-top: 16px; }
+.meetings-list > li { border-top: 1px solid var(--line); padding: 12px 0; }
+.meetings-list summary { font-weight: 650; line-height: 1.5; }
+.meetings-list ul { list-style: none; margin: 12px 0; line-height: 1.6; }
+.calendar-class { background: #d6eadb; border-color: #4c8765; color: #143b28; }
+.calendar-class:hover { background: #c4decf; }
+@media (max-width: 600px) {
+  .results-panel { padding: 20px 16px; }
+  .metrics-comparison { grid-template-columns: 1fr; }
+  .metrics-comparison dl { border-bottom: 1px solid var(--line); }
+}

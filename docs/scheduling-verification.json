@@ -1,0 +1,28 @@
+{
+  "revision": "d506455be974a49c8aa79ab74cd89731a60cfefc",
+  "usableClasses": 4943,
+  "usableBlocks": 7942,
+  "excluded": [
+    {
+      "periodo": "20252",
+      "turmaId": "TEO3235-1FW",
+      "reason": "Blocos da própria turma se sobrepõem"
+    },
+    {
+      "periodo": "20261",
+      "turmaId": "ART1028-18D",
+      "reason": "Blocos da própria turma se sobrepõem"
+    },
+    {
+      "periodo": "20261",
+      "turmaId": "ECO1352-2JA",
+      "reason": "Blocos da própria turma se sobrepõem"
+    },
+    {
+      "periodo": "20261",
+      "turmaId": "ENG4922-3VA",
+      "reason": "Blocos da própria turma se sobrepõem"
+    }
+  ],
+  "result": "All identities, complete meetings, labels, unknown credits and exclusions match independent CSV normalization."
+}

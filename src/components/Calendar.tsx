@@ -2,26 +2,33 @@ import { useState } from 'react'
 import type { CSSProperties } from 'react'
 import { dias, layoutBlocks, minutes, sortedBlocks } from '../domain/draft'
 import type { Bloqueio } from '../domain/draft'
+import type { Grade } from '../types'
+import { timeLabel } from '../domain/time'
 import { plural } from '../labels'
 
 export function Calendar({
   bloqueios,
+  grade,
   onEdit,
   onRemove,
   onAdd,
 }: {
   bloqueios: Bloqueio[]
+  grade?: Grade
   onEdit: (block: Bloqueio) => void
   onRemove: (id: string) => void
   onAdd: () => void
 }) {
   const [day, setDay] = useState(0)
+  const meetings = grade?.sections.flatMap((section) => section.slots.map((slot) => ({ ...slot, section }))) ?? []
   const start = Math.min(
     420,
+    ...meetings.map((slot) => Math.floor(slot.start / 60) * 60),
     ...bloqueios.map((block) => Math.floor(minutes(block.inicio) / 60) * 60),
   )
   const end = Math.max(
     1380,
+    ...meetings.map((slot) => Math.ceil(slot.end / 60) * 60),
     ...bloqueios.map((block) => Math.ceil(minutes(block.fim) / 60) * 60),
   )
   const hours = Array.from(
@@ -35,11 +42,11 @@ export function Calendar({
         <div>
           <span className="eyebrow">Seu planejamento</span>
           <h2 id="calendar-title">A semana começa aqui.</h2>
-          <p>Visualize seus horários indisponíveis.</p>
+          <p>{grade ? 'Aulas e bloqueios, na mesma semana.' : 'Visualize seus horários indisponíveis.'}</p>
         </div>
         <span className="legend">
           <span className="hatch-swatch" />
-          Bloqueio
+          Bloqueio {grade && '· Aulas em verde'}
         </span>
       </div>
       <div className="day-nav">
@@ -94,6 +101,21 @@ export function Calendar({
               </span>
             </div>
             <div className="day-track" style={{ height }}>
+              {meetings.filter((slot) => slot.day === index).map((slot) => (
+                <button className={`calendar-block calendar-class ${slot.end - slot.start < 60 ? 'short-block' : ''} ${slot.end - slot.start < 120 ? 'compact-block' : ''}`}
+                  key={`${slot.section.id}/${slot.start}`}
+                  aria-label={`${slot.section.code} turma ${slot.section.label}, ${label}, ${timeLabel(slot.start)} a ${timeLabel(slot.end)}. Ver todos os encontros`}
+                  onClick={() => {
+                    const detail = document.getElementById(`meetings-${slot.section.code}`)
+                    detail?.setAttribute('open', '')
+                    detail?.querySelector('summary')?.focus()
+                    detail?.scrollIntoView({ block: 'nearest' })
+                  }}
+                  style={{ top: `${((slot.start - start) / 60) * 38}px`, height: `${((slot.end - slot.start) / 60) * 38}px`, left: '3px', width: 'calc(100% - 6px)' }}>
+                  <span>{slot.section.code}</span>
+                  <small>{timeLabel(slot.start)}–{timeLabel(slot.end)}</small>
+                </button>
+              ))}
               {layoutBlocks(
                 bloqueios.filter((block) => block.dia === index),
               ).map(({ block, lane, lanes }) => {
@@ -123,7 +145,7 @@ export function Calendar({
             </div>
           </div>
         ))}
-        {bloqueios.length === 0 && (
+        {bloqueios.length === 0 && !grade && (
           <div className="calendar-empty">
             <span className="empty-line" />
             <h3>Espaço para a sua rotina</h3>
@@ -140,7 +162,7 @@ export function Calendar({
       </div>
       <div className="calendar-caption">
         <span>Segunda a sábado · horários proporcionais</span>
-        <span>Somente bloqueios. Aulas ainda não geradas.</span>
+        <span>{grade ? 'Detalhes de cada turma contêm todos os encontros.' : 'Aulas aparecerão depois de gerar uma grade.'}</span>
       </div>
       <div className="block-summary">
         <div className="block-summary-heading">

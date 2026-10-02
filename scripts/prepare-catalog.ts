@@ -2,6 +2,8 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
 import { aggregateCatalog, parseCsv } from '../src/domain/catalog.ts'
 
+import { normalizeSections } from '../src/domain/scheduling.ts'
+
 const revision = 'd506455be974a49c8aa79ab74cd89731a60cfefc'
 const base = `https://raw.githubusercontent.com/igor-peres/impact-lab-sieng2026/${revision}/data/case3_grade_horaria`
 const paths = process.argv.slice(2)
@@ -48,6 +50,7 @@ const payload = {
 }
 await mkdir('src/data', { recursive: true })
 await writeFile('src/data/catalog.json', `${JSON.stringify(payload)}\n`)
+await writeFile('src/data/scheduling.json', `${JSON.stringify({ schemaVersion: 1, source: payload.source, ...normalizeSections(rows[0], ofertas) })}\n`)
 console.log(
   JSON.stringify(
     ofertas.map(({ periodo, disciplinas, totalTurmas, totalBlocos }) => ({

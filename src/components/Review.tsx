@@ -124,8 +124,7 @@ export function Review({
           )}
         </section>
         <p className="attention">
-          Geração e comparação de grades ainda não disponíveis. Suas escolhas
-          ficam neste navegador.
+          Depois de revisar, use “Gerar grade” para buscar até cinco alternativas. Suas escolhas ficam neste navegador.
         </p>
         <button className="primary" onClick={onClose}>
           Concluir revisão

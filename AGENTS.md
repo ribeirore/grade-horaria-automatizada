@@ -30,7 +30,7 @@ npm test          # run Vitest domain tests
 npm run test:e2e  # run Chromium flows and axe checks against the production preview
 ```
 
-Run `npm test`, `npm run lint`, `npm run build`, and `npm run test:e2e` before handoff. Install Chromium with `npx playwright install chromium` once. Generation and comparison remain unavailable; the calendar displays only user-entered unavailability. Preserve the nested `grade-horaria-automatizada/` copy and pre-existing local work.
+Run `npm test`, `npm run lint`, `npm run build`, and `npm run test:e2e` before handoff. Install Chromium with `npx playwright install chromium` once. Generation runs in a cancellable Web Worker, with up to five alternatives ranked by ordered priorities; the calendar includes full class meetings and user-entered unavailability. Preserve the nested `grade-horaria-automatizada/` copy and pre-existing local work.
 
 ## Coding Style & Naming Conventions
 
