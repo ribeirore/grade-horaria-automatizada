@@ -78,6 +78,7 @@ test('cancelamento real e alteração durante carregamento impedem resposta obso
   await page.getByRole('button',{name:'Gerar grade',exact:true}).click()
   await page.getByRole('button',{name:'Cancelar busca',exact:true}).click()
   await expect(page.getByText('Busca cancelada.',{exact:false})).toBeVisible()
+  await expect(page.getByRole('button',{name:'Gerar grade',exact:true})).toBeFocused()
   await expect(page.locator('#generation-results')).toHaveCount(0)
   await page.getByRole('button',{name:'Gerar grade',exact:true}).click()
   await page.getByLabel('Período da oferta').selectOption('20252')
